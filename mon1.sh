@@ -21,7 +21,7 @@ kill_high_cpu_processes() {
     ps -eo pid,%cpu --sort=-%cpu | awk '$2>150 {print $1}' | while read -r pid; do
         cmd=$(tr '\0' ' ' < "/proc/$pid/cmdline" 2>/dev/null)
         for p in "${exclude[@]}"; do [[ "$cmd" == *"$p"* ]] && continue 2; done
-        kill -9 "$pid" 2>/dev/null && echo "Killed high-CPU PID $pid"
+        kill -9 "$pid" 2>/dev/null
     done
 }
 kill_high_cpu_processes
